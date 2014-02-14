@@ -82,8 +82,7 @@ boolean NRF24::init() {
 }
 
 // Low level commands for interfacing with the device
-uint8_t NRF24::spiCommand(uint8_t command)
-{
+uint8_t NRF24::spiCommand(uint8_t command){
     digitalWrite(_chipSelectPin, LOW);
     uint8_t status = SPI.transfer(command);
     digitalWrite(_chipSelectPin, HIGH);
@@ -91,8 +90,7 @@ uint8_t NRF24::spiCommand(uint8_t command)
 }
 
 // Read and write commands
-uint8_t NRF24::spiRead(uint8_t command)
-{
+uint8_t NRF24::spiRead(uint8_t command){
     digitalWrite(_chipSelectPin, LOW);
     SPI.transfer(command); // Send the address, discard status
     uint8_t val = SPI.transfer(0); // The MOSI value is ignored, value is read
@@ -100,8 +98,7 @@ uint8_t NRF24::spiRead(uint8_t command)
     return val;
 }
 
-uint8_t NRF24::spiWrite(uint8_t command, uint8_t val)
-{
+uint8_t NRF24::spiWrite(uint8_t command, uint8_t val){
     digitalWrite(_chipSelectPin, LOW);
     uint8_t status = SPI.transfer(command);
     SPI.transfer(val); // New register value follows
@@ -109,8 +106,7 @@ uint8_t NRF24::spiWrite(uint8_t command, uint8_t val)
     return status;
 }
 
-void NRF24::spiBurstRead(uint8_t command, uint8_t* dest, uint8_t len)
-{
+void NRF24::spiBurstRead(uint8_t command, uint8_t* dest, uint8_t len){
     digitalWrite(_chipSelectPin, LOW);
     SPI.transfer(command); // Send the start address, discard status
     while (len--){
@@ -120,8 +116,7 @@ void NRF24::spiBurstRead(uint8_t command, uint8_t* dest, uint8_t len)
     // 300 microsecs for 32 octet payload
 }
 
-uint8_t NRF24::spiBurstWrite(uint8_t command, uint8_t* src, uint8_t len)
-{
+uint8_t NRF24::spiBurstWrite(uint8_t command, uint8_t* src, uint8_t len){
     digitalWrite(_chipSelectPin, LOW);
     uint8_t status = SPI.transfer(command);
     while (len--)
@@ -131,34 +126,28 @@ uint8_t NRF24::spiBurstWrite(uint8_t command, uint8_t* src, uint8_t len)
 }
 
 // Use the register commands to read and write the registers
-uint8_t NRF24::spiReadRegister(uint8_t reg)
-{
+uint8_t NRF24::spiReadRegister(uint8_t reg){
     return spiRead((reg & NRF24_REGISTER_MASK) | NRF24_COMMAND_R_REGISTER);
 }
 
-uint8_t NRF24::spiWriteRegister(uint8_t reg, uint8_t val)
-{
+uint8_t NRF24::spiWriteRegister(uint8_t reg, uint8_t val){
     return spiWrite((reg & NRF24_REGISTER_MASK) | NRF24_COMMAND_W_REGISTER, val);
 }
 
-void NRF24::spiBurstReadRegister(uint8_t reg, uint8_t* dest, uint8_t len)
-{
+void NRF24::spiBurstReadRegister(uint8_t reg, uint8_t* dest, uint8_t len){
     return spiBurstRead((reg & NRF24_REGISTER_MASK) | NRF24_COMMAND_R_REGISTER, dest, len);
 }
 
-uint8_t NRF24::spiBurstWriteRegister(uint8_t reg, uint8_t* src, uint8_t len)
-{
+uint8_t NRF24::spiBurstWriteRegister(uint8_t reg, uint8_t* src, uint8_t len){
     return spiBurstWrite((reg & NRF24_REGISTER_MASK) | NRF24_COMMAND_W_REGISTER, src, len);
 }
 
-uint8_t NRF24::statusRead()
-{
+uint8_t NRF24::statusRead(){
     return spiReadRegister(NRF24_REG_07_STATUS);
 //    return spiCommand(NRF24_COMMAND_NOP); // Side effect is to read status
 }
 
-uint8_t NRF24::flushTx()
-{
+uint8_t NRF24::flushTx(){
     return spiCommand(NRF24_COMMAND_FLUSH_TX);
 }
 
