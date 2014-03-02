@@ -489,8 +489,11 @@ boolean NRF24::send(uint8_t* data, uint8_t len, boolean noack) {
 
     // Must clear NRF24_MAX_RT if it is set, else no further comm
     spiWriteRegister(NRF24_REG_07_STATUS, status | ~NRF24_TX_DS | ~NRF24_MAX_RT);
-    if (status & NRF24_MAX_RT)
+    if (status & NRF24_MAX_RT){
         flushTx();
+        return false;
+    }
+
     // Return true if data sent, false if MAX_RT
     return status & NRF24_TX_DS;
 }
