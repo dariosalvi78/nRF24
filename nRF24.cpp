@@ -495,7 +495,7 @@ boolean NRF24::send(uint8_t* data, uint8_t len, boolean noack) {
     }
 
     // Return true if data sent
-    return status & NRF24_TX_DS;
+    return (status & NRF24_TX_DS)!=0;
 }
 
 boolean NRF24::isSending() {
