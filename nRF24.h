@@ -303,6 +303,15 @@ public:
      */
     static boolean setTXRetries(uint8_t delay, uint8_t count = 3);
 
+
+    /** Tells if two addresses are the same.
+     * @param addr1 the first address
+     * @param addr2 the second address
+     * @param len the length of the address
+     * @return true if they are equals
+     */
+    static boolean areAddressesEquals(uint8_t *addr1, uint8_t* addr2, uint8_t len);
+
     /** Sets the next transmit address.
      * Uses this address in TX address and RX pipe 0 if ShockBurst is enabled
      * @param address The new address for transmitting.
@@ -586,13 +595,6 @@ private:
      */
     static uint8_t flushRx();
 
-    /** Tells if two addresses are the same.
-     * @param addr1 the first address
-     * @param addr2 the second address
-     * @param len the length of the address
-     * @return true if they are equals
-     */
-    static boolean areAddressesEquals(uint8_t *addr1, uint8_t* addr2, uint8_t len);
 };
 
 /** THE instance, Arduino style

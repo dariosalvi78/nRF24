@@ -494,7 +494,7 @@ boolean NRF24::send(uint8_t* data, uint8_t len, boolean noack) {
         return false;
     }
 
-    // Return true if data sent, false if MAX_RT
+    // Return true if data sent
     return status & NRF24_TX_DS;
 }
 
