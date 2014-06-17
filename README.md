@@ -19,6 +19,8 @@ Alternatives:
 *  [Greg Copeland's fork of RF24](https://github.com/gcopeland/RF24)
 *  [Stanley Seow's fork of RF24](https://github.com/stanleyseow/RF24), includes support for RaspberryPi
 *  [Arco van Geest's fork of RF24](https://github.com/gnulnulf/RF24), includes support for RaspberryPi
+*  [Charles-Henri Hallard's fork of RF24](https://github.com/hallard/RF24), with support for RaspberryPi
+*  [Trey Keown's fork of RF24](https://github.com/jfktrey/RF24), with support for RaspberryPi
 
 
 Known issues and todos:
